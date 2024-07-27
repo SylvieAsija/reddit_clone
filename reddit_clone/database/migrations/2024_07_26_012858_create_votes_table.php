@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('comments', function (Blueprint $table) {
+        Schema::create('votes', function (Blueprint $table) {
             $table->id();
-            $table->foreignIdFor(App\Models\Post::class)->onDelete('cascade');
             $table->foreignIdFor(App\Models\User::class)->onDelete('cascade');
-            $table->text('content');
-            $table->integer('upvotes')->default(0);
-            $table->integer('downbotes')->default(0);
+            $table->morphs('votable');
+            $table->boolean('vote_type');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('votes');
     }
 };

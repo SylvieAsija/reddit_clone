@@ -18,7 +18,7 @@ Route::get('/', function () {
 });
 
 Route::get('/email/verify', function () {
-    return Inertia::render('auth.verify-email');
+    return Inertia::render('auth.VerifyEmail');
 })->middleware('auth')->name('verificaition.notice');
 
 Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
@@ -37,10 +37,13 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
 });
 
 // Route::resource('posts', PostController::class) {

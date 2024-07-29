@@ -1,13 +1,13 @@
 import { PageProps } from "@/types";
 
-interface Props {
-    date: Date,
-    title: string,
-    content: string,
-    upvotes: number
-}
+// interface Props {
+//     date: Date,
+//     title: string,
+//     content: string,
+//     upvotes: number,
+// }
 
-export default function Timeline ({date, title, content, upvotes}: Props) {
+export default function Timeline ({date, title, content, upvotes}: any) {
 return (
 <ol className="relative border-s border-gray-200 dark:border-gray-700">                  
     <li className="mb-10 ms-4">

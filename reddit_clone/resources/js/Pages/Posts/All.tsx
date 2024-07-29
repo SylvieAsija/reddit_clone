@@ -4,13 +4,16 @@ import { PageProps } from '@/types';
 import Timeline from '@/Components/Timeline';
 
 interface Props {
-    date: Date
-    title: string
-    content: string
+    date: Date,
+    title: string,
+    content: string,
     upvotes: number
 }
 
-export default function Posts({auth}: PageProps, {date, title, content, upvotes}: Props) {
+export default function Posts({auth, date, title, content, upvotes}: any) {
+
+
+    
     return (
         <AuthenticatedLayout
             user={auth.user}

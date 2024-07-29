@@ -12,8 +12,6 @@ interface Props {
 
 export default function Posts({auth, date, title, content, upvotes}: any) {
 
-
-    
     return (
         <AuthenticatedLayout
             user={auth.user}
@@ -24,7 +22,7 @@ export default function Posts({auth, date, title, content, upvotes}: any) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <Timeline date={date} title={title} content={content} upvotes={upvotes} />
+                        <Timeline dates={date} titles={title} contents={content} upvotes={upvotes} />
                     </div>
                 </div>
             </div>

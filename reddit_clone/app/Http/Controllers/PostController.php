@@ -13,12 +13,16 @@ class PostController extends Controller
     {
         $posts = Post::all();
 
-        foreach($posts as $post) {
-            $date = $post->created_at->toDateString();
-            $title = $post->title;
-            $content = $post->content;
-            $upvotes = $post->upvotes;
+        foreach($posts as $postNum => $post) {
+            $date[$postNum] = $post->created_at->toDateString();
+            $title[$postNum] = $post->title;
+            $content[$postNum] = $post->content;
+            $upvotes[$postNum] = $post->upvotes;
+
+            echo $postNum, " ", $title[$postNum], " ", $upvotes[$postNum], " ", $date[$postNum], "<br>";
         }
+
+        
 
         return Inertia::render('Posts/All', [
             // 'date' => $posts[0]->created_at->toDateString(),
@@ -26,10 +30,19 @@ class PostController extends Controller
             // 'content' => $posts[0]->content,
             // 'upvotes' => $posts[0]->upvotes,
 
+            'posts' => $post->only(
+                'created_at',
+                'title',
+                'content',
+                'upvotes',
+            ),
+            
             'date' => $date,
             'title' => $title,
             'content' => $content,
             'upvotes' => $upvotes,
+
+            // 'posts' => $post
         ]);
 
         // return Post::all();

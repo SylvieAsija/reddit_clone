@@ -2,15 +2,20 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { PageProps } from '@/types';
 import Timeline from '@/Components/Timeline';
+import PostCard from '@/Components/PostCard';
 
-interface Props {
-    date: Date,
-    title: string,
-    content: string,
-    upvotes: number
+
+interface Post {
+    id: number;
+    user: string;
+    title: string;
+    content: string;
+    upvotes: number;
+    downvotes: number;
+    updated_at: string;
 }
 
-export default function Posts({auth, date, title, content, upvotes}: any) {
+export default function Posts({auth, posts}:PageProps & {posts: Post[]}) {
 
     return (
         <AuthenticatedLayout
@@ -22,7 +27,19 @@ export default function Posts({auth, date, title, content, upvotes}: any) {
             <div className="py-12">
                 <div className="max-w-7xl mx-auto sm:px-6 lg:px-8">
                     <div className="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
-                        <Timeline dates={date} titles={title} contents={content} upvotes={upvotes} />
+                        {
+                            posts.map(post =>
+                                <PostCard
+                                    key={post.id}
+                                    user={post.user}
+                                    title={post.title}
+                                    content={post.content}
+                                    upvotes={post.upvotes}
+                                    downvotes={post.downvotes}
+                                    updatedAt={post.updated_at}
+                                />
+                            )
+                        }
                     </div>
                 </div>
             </div>

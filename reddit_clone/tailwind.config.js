@@ -15,6 +15,15 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                'reddit_bg': '#0E1113',
+                'post_hover': '#181C1F',
+                'subreddit_name': '#B7CAD4',
+                'subreddit_name_hover': '#90A9FD',
+                'post_text': '#A8CAD4',
+                'upvote': '#D93900',
+                'downvote': '#6A5CFF'
+            }
         },
     },
 

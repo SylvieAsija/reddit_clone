@@ -18,6 +18,7 @@ class PostFactory extends Factory
     {
         return [
             'user_id' => rand(1, 10),
+            'subreddit_id' => rand(1,5),
             'title' => fake()->name(),
             'content' => fake()->text(),
             'upvotes' => rand(1, 100)

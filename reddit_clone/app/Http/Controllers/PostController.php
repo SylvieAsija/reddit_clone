@@ -22,9 +22,9 @@ class PostController extends Controller
         //     echo $postNum, " ", $title[$postNum], " ", $upvotes[$postNum], " ", $date[$postNum], "<br>";
         // }
 
-        $posts = Post::with('User')->get(['id', 'user_id', 'title', 'content', 'upvotes', 'downvotes', 'updated_at']);
+        $posts = Post::with('User', 'Subreddit')->get(['id', 'user_id', 'title', 'content', 'upvotes', 'downvotes', 'updated_at', 'subreddit_id']);
         
-        echo $posts;
+        // echo $posts;
 
         return Inertia::render('Posts/All', [
             // 'date' => $posts[0]->created_at->toDateString(),
@@ -55,6 +55,7 @@ class PostController extends Controller
                     'upvotes' => $post->upvotes,
                     'downvotes' => $post->downvotes,
                     'updated_at' => $post->updated_at,
+                    'subreddit' => $post->subreddit->name,
                 ];
             }),
         ]);

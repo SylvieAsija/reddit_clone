@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class Subreddit extends Model
 {
     use HasFactory;
+
+    protected $fillable = ['name', 'description'];
+
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

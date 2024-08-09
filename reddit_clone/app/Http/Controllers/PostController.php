@@ -9,7 +9,7 @@ use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         //$posts = Post::all();
 
@@ -22,8 +22,15 @@ class PostController extends Controller
         //     echo $postNum, " ", $title[$postNum], " ", $upvotes[$postNum], " ", $date[$postNum], "<br>";
         // }
 
-        $posts = Post::with('User', 'Subreddit')->get(['id', 'user_id', 'title', 'content', 'upvotes', 'downvotes', 'updated_at', 'subreddit_id']);
-        
+        //$posts = Post::with('User', 'Subreddit')->get(['id', 'user_id', 'title', 'content', 'upvotes', 'downvotes', 'updated_at', 'subreddit_id']);
+        $posts = Post::with('User', 'Subreddit')
+            ->orderBy('updated_at', 'desc')
+            ->paginate(12);
+
+        if ($request->wantsJson()) {
+            return response()->json($posts);
+        }    
+
         // echo $posts;
 
         return Inertia::render('Posts/All', [
@@ -46,18 +53,19 @@ class PostController extends Controller
 
             // 'posts' => $posts
 
-            'posts' => $posts->map(function ($post) {
-                return [
-                    'id' => $post->id,
-                    'user' => $post->user->name,
-                    'title' => $post->title,
-                    'content' => $post->content,
-                    'upvotes' => $post->upvotes,
-                    'downvotes' => $post->downvotes,
-                    'updated_at' => $post->updated_at,
-                    'subreddit' => $post->subreddit->name,
-                ];
-            }),
+            // 'posts' => $posts->map(function ($post) {
+            //     return [
+            //         'id' => $post->id,
+            //         'user' => $post->user->name,
+            //         'title' => $post->title,
+            //         'content' => $post->content,
+            //         'upvotes' => $post->upvotes,
+            //         'downvotes' => $post->downvotes,
+            //         'updated_at' => $post->updated_at,
+            //         'subreddit' => $post->subreddit->name,
+            //     ];
+            // }),
+            'posts' => $posts
         ]);
 
         // return Post::all();

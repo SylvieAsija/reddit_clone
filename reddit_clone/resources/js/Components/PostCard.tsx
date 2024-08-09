@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface PostCardProps {
+    id: number;
     user: string;
     title: string;
     content: string;
@@ -11,7 +12,7 @@ interface PostCardProps {
 }
 
 // const PostCard: React.FC<PostCardProps> = ({ user, title, content, upvotes, downvotes, updatedAt }) => {
-export default function PostCard ({ user, title, content, upvotes, downvotes, updatedAt, subreddit }:PostCardProps) {
+export default function PostCard ({ id, user, title, content, upvotes, downvotes, updatedAt, subreddit }:PostCardProps) {
 return (
         // <div className="bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md">
         //     <h2 className="text-xl font-semibold mb-2 text-gray-500">{title}</h2>
@@ -21,7 +22,7 @@ return (
         //     <p className="text-gray-500 dark:text-gray-400 text-sm">Upvotes: {upvotes} | Downvotes: {downvotes}</p>
         // </div>
         <div className="bg-white dark:bg-reddit_bg p-4 rounded-lg shadow pb-8 hover:bg-post_hover">
-            <h3 className="text-xl font-semibold mb-2 text-white">{`Post Title: ${title}`}</h3>
+            <h3 className="text-xl font-semibold mb-2 text-white">{`${id}: Post Title: ${title}`}</h3>
             <p className="text-sm text-subreddit_name hover:text-subreddit_name_hover">{`Posted by u/${user} in r/${subreddit || 'Unknown'}`}</p>
             <p className="mt-2 text-post_text">{`Post Body: ${content}`}</p>
             <div className="mt-4 flex justify-between items-center">
